@@ -529,11 +529,11 @@ bun knowledge-graph/scripts/kg-skill-graph.js --query "write outbound sequence"
 
 ---
 
-## Slide 5.1 — The Clay problem
+## Slide 5.1 — The interface problem
 
-**Storyboard:** A stark cost-per-record number, large and centered. Below it, a multiplication: "× 11,000 records/month" — and the result. Nothing else. No logos, no screenshots. The number does the work. The viewer either recognizes this as their life, or as what they're avoiding.
+**Storyboard:** Ten tool names scattered across a dark screen in different font sizes — Clay, Apollo, Instantly, N8n, Notion, Google Sheets, ChatGPT, Sales Nav, Slack, Loom. All slightly overlapping, slightly chaotic. A single arrow pointing right. Then: one terminal cursor, blinking. Nothing else. The visual is the argument.
 
-> **Speaker notes:** Clay is a great product. I'm not saying it isn't. 494,000 leads contacted in Q1. That's the volume this system runs. At that scale, you're paying for enrichment on tens of thousands of records a month. Standard Clay enrichment — website scrape, LinkedIn pull, tech stack — runs somewhere between $0.05 and $0.15 per record depending on your plan and which providers you hit. At 11,000 records, that's $550 to $1,650 a month just for the data layer. And you don't own any of it — if Clay changes pricing or a provider drops out, you start over. The waterfall runs the same enrichment for a fraction of that. Most records at near-zero cost. The math is in slide 5.6. [FILL IN YOUR ACTUAL MONTHLY CLAY SPEND BEFORE RECORDING — use real numbers.]
+> **Speaker notes:** Count the tabs. Clay for enrichment. Apollo or ZoomInfo for list building. Instantly or Smartlead for sending. N8n for automation. Notion or Google Docs for research and SOPs. Sheets for reporting. ChatGPT for copy. Sales Nav for prospecting. Slack for handoffs. Loom to train the SDRs who run all of it. That's ten interfaces to run one outbound function. Every switch has a cost — not just the subscription, but the context switch, the handoff, the thing that falls through the gap between tools. What Claude Code actually solves isn't any one of those tools. It's the interface tax on all of them. One terminal. Everything routes through it. That's what this chapter is about.
 
 ---
 
@@ -593,29 +593,29 @@ Cost: $0.00
 
 ## Slide 5.5 — Tier 3: When free doesn't cover it
 
-**Storyboard:** A small three-row table: tool name, cost per query, and when it fires. The "When it fires" column tells the story — each row says "on miss from Tier 2." The visual point is that Tier 3 is conditional, not default. A subtle "(edge cases only)" note at the bottom reinforces this.
+**Storyboard:** A small two-row table: tool name, cost per query, and when it fires. The "When it fires" column tells the story — conditional, not default. A subtle "(edge cases only)" note at the bottom reinforces this.
 
 | Tool | Cost | When it fires |
 |------|------|---------------|
 | OpenWebNinja | $0.002/query | Website thin, LinkedIn sparse |
-| Clay | $X/credit | Complex signal workflows |
-| FullEnrich | $Y/record | Contact data completion needed |
+| Clay | $X/credit | Complex signal workflows requiring Clay's native integrations |
 
-> **Speaker notes:** Tier 3 only fires on misses. If you've gotten what you need from Tier 1 and 2, you don't call Tier 3. For records where the website is thin and LinkedIn is sparse — usually smaller companies, early-stage startups — that's when you hit the paid APIs. The script handles the fallback logic automatically. Most of your list never touches this tier.
+> **Speaker notes:** Tier 3 only fires on misses. For records where the website is thin and LinkedIn is sparse — usually smaller companies, early-stage startups — that's when you hit the paid APIs. The script handles the fallback logic automatically. Most of your list never touches this tier. And when it does hit Clay, that's intentional — Clay's native integrations for complex signal work are genuinely useful. The difference is you're calling Clay from one interface, not running your whole operation inside it.
 
 ---
 
-## Slide 5.6 — The cost comparison
+## Slide 5.6 — Clay vs. waterfall: the full comparison
 
-**Storyboard:** A side-by-side table with two columns: "Clay-only" and "Waterfall." Three rows: cost per 1,000 records, enrichment ownership, and iteration speed. The numbers should be real (fill in from actual spend). The "Ownership" row is the sleeper argument — colored differently to draw attention. The visual tells the operator: this is a build-vs-rent decision.
+**Storyboard:** A side-by-side table with two columns: "Clay-only" and "Waterfall." Four rows. Same dark background, same clean format. The "Interface" row is new and sits at the top — it's the lead. Cost comes second. Ownership and iteration speed follow. The visual tells the operator this isn't just a cost arbitrage — it's a workflow consolidation.
 
 | | Clay-only | Waterfall |
 |--|---------|---------|
+| Interface | Separate UI, credit dashboard, workflow builder | Same terminal as everything else |
 | 1,000 records | $X | ~$Y |
 | Data ownership | Platform-dependent | Yours forever |
 | Iteration | Change in Clay UI | Change the script |
 
-> **Speaker notes:** Use real numbers from your actual Clay spend vs. waterfall runs. The ownership row is the sleeper argument — once you've built the waterfall, you own the logic. You're not dependent on Clay changing their pricing or their data sources. That's an infrastructure argument, not a cost argument. The script is yours. The data is yours.
+> **Speaker notes:** The interface row is the lead. Clay is a great product — but it's a separate context. You're logging in, managing credits, building workflows in its own builder, then handing off to your sending tool, then handing off again. The waterfall runs from the same terminal as your research agents, your sequence generator, your Bison upload. One interface. The cost difference is real — Clay's enrichment at scale can run $500 to $1,500 a month depending on your volume and plan. The waterfall runs most of that at near-zero. But the bigger gain is that you stopped paying the interface tax.
 
 ---
 
@@ -684,9 +684,9 @@ The build sequence:
 
 ## Slide 7.1 — The claim
 
-**Storyboard:** Single bold sentence, centered on black: "This isn't a productivity hack." Line break. "It's a cost-of-delivery restructure." Two sentences, two lines, large type. The word "productivity" should feel almost dismissive — the viewer who's been thinking "AI efficiency tool" needs to recalibrate. Let the slide sit.
+**Storyboard:** Single bold sentence, centered on black: "This isn't a productivity hack." Line break. "It's what happens when 10 interfaces collapse into one." Two sentences, two lines, large type. Let it sit. The viewer who's been nodding along since Chapter 1 should feel this land.
 
-> **Speaker notes:** Every chapter before this was about building the system. This chapter is about what the system is worth commercially. Not as a tool you sell — as infrastructure that changes your margin. Two audiences for this chapter: operators who want to understand their own economics, and anyone who needs to make a business case to leadership or a client.
+> **Speaker notes:** Every chapter before this was about building the system. This chapter is about what it's worth commercially. Not as a tool you sell — as infrastructure that changes how you operate. When the interface tax disappears, two things happen: your team moves faster, and you need less of them to produce the same output. That's not an efficiency gain. That's a structural change. Two audiences: operators who want to understand their own economics, and anyone making a business case to leadership or a client.
 
 ---
 
@@ -769,13 +769,13 @@ What you charge for:
 
 ## Slide 7.7 — The client-facing case
 
-**Storyboard:** Same quote box format as 7.6, different framing. This one is client-facing — the tone shifts from internal efficiency to competitive differentiation. Two key claims: cost per meeting booked vs. competitors, and ramp time (two weeks vs. six). These are the two numbers clients actually ask about. Make them prominent.
+**Storyboard:** Same quote box format as 7.6, different framing. Client-facing — tone shifts from internal efficiency to competitive differentiation. Three claims visible: meetings booked, ramp time, output velocity. These are the numbers clients actually ask about. Make them prominent.
 
 > **For AEs pitching clients:**
 
-"Our delivery model runs on Claude Code infrastructure. That's why our cost per meeting booked is lower than our competitors and our ramp time on new campaigns is two weeks, not six."
+"Our delivery model runs on Claude Code infrastructure. We're booking 20-30% more meetings per client than we were two years ago, our ramp time on new campaigns is two weeks not six, and our team size has gone down while output has gone up."
 
-> **Speaker notes:** This is the client framing. They need two things: proof that the output is better (cost per meeting), and proof that it's faster (ramp time). Neither requires them to understand what Claude Code is. You're telling them what the system produces, not what it runs on. Fill in your real cost-per-meeting numbers before using this in a sales conversation.
+> **Speaker notes:** Clients need proof on two axes: output (are they getting more meetings?) and speed (how fast can you get campaigns live?). Neither requires them to understand what Claude Code is. You're telling them what the system produces, not what it runs on. The 20-30% meetings stat is real — that's the LeadGrow number year-over-year. The two-week ramp is real. The team shrinking 50% while output increased — that's the structural argument. You can lead with whichever stat matches what they're asking about.
 
 ---
 
