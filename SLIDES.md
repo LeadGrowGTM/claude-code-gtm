@@ -32,15 +32,16 @@
 
 ---
 
-## Slide 0.3 — Three loops planted
+## Slide 0.3 — Four loops planted
 
-**Storyboard:** Three horizontal cards, slightly staggered, on a dark background. Each card has a chapter number top-left and a single-line hook in quotes — large enough to read at a glance. The cards look like pinned notes or open loops. No timestamps yet (add in post). The visual says: "these are promises I'm going to keep."
+**Storyboard:** Four horizontal cards, slightly staggered, on a dark background. Each card has a chapter number top-left and a single-line hook in quotes — large enough to read at a glance. The cards look like pinned notes or open loops. No timestamps yet (add in post). The visual says: "these are promises I'm going to keep." The fourth card (bonus) is slightly smaller or set apart visually — it's the cherry on top, not a core chapter.
 
 - **Ch. 6:** "Cold company. No prep. Live campaign in under an hour."
 - **Ch. 5:** "The enrichment waterfall that replaced most of our Clay spend."
 - **Ch. 7:** "The headcount math. Two operators vs. six SDRs."
+- **Bonus:** "If you do sales calls — stay for the last segment."
 
-> **Speaker notes:** I'm planting three loops now so you know what to look forward to. Chapter 6 is the main event — I pick a company I've never touched, and we go from zero to a live campaign in under an hour. Timer on screen. No edits. Chapter 5 is the cost story. Chapter 7 is the business case.
+> **Speaker notes:** Four things I want you watching for. Chapter 6 is the main event — I pick a company I've never touched, and we go from zero to a live campaign in under an hour. Timer on screen. No edits. Chapter 5 is the cost story. Chapter 7 is the business case. And I'm closing the whole thing with something that's not about outbound at all — if you do sales calls, that last segment is worth staying for.
 
 ---
 
@@ -58,7 +59,7 @@
 | **6** | **The Live GTM Build** | **50 min** |
 | 7 | The Business Layer | 20 min |
 
-> **Speaker notes:** Skip to whatever chapter is most relevant. Each one is standalone. If you're already running Claude Code and you just want to see the live build, jump to chapter 6. If you want the business case slides, that's chapter 7.
+> **Speaker notes:** The chapters build on each other — skip one and you'll feel it. Specifically: Chapter 3 (skills) is what makes the live build in Chapter 6 readable. If you jump straight to Chapter 6 without Chapter 3, you're watching a demo, not a blueprint. If you're already running Claude Code and want the cost argument, Chapter 5 and 7 are standalone. Everything else, watch in order. Here's where we're going — start with the thesis.
 
 ---
 
@@ -114,7 +115,7 @@
 
 ## Slide 1.5 — The 4-layer architecture
 
-**Storyboard:** A vertical stack of four clearly separated layers, each a distinct color block. The top layer (CLAUDE.md) is the widest and most prominent — it sits over everything. Below it, Rules, Skills, Agents stack in descending order. Each layer has its name on the left and a one-line description on the right. The diagram reads top-to-bottom: "this is the whole system."
+**Storyboard:** A vertical stack of four clearly separated layers, each a distinct color block. The top layer (CLAUDE.md) is the widest and most prominent — it sits over everything. Below it, Rules, Skills, Agents stack in descending order. Each layer has its name on the left and a one-line description on the right. The diagram reads top-to-bottom: "this is the whole system." Let it sit on screen for a full 3 seconds before speaking — viewers need to map it.
 
 ```
 ┌─────────────────────────────────────────┐
@@ -128,7 +129,7 @@
 └─────────────────────────────────────────┘
 ```
 
-> **Speaker notes:** This is the whole system in one diagram. CLAUDE.md is at the top — it's the brief that loads every session. Rules sit below that — they constrain behavior so you don't get hallucinated outputs on campaign copy. Skills are your encoded SOPs. Agents are the workers who run them. Every chapter covers one layer. By chapter 5 you'll have all four running together.
+> **Speaker notes:** [Pause 3 seconds. Let the viewer read it.] This is the whole system in one diagram. CLAUDE.md at the top — loads every session, sets the operating mode. Rules below it — prevent the failure modes that cost you time on campaign work. Skills below that — your encoded SOPs, running correctly without re-prompting. Agents at the bottom — the workers who execute everything in parallel. Every chapter covers one layer. By chapter 5 you'll have all four running together. Before I go deep on each one — let me show you what this looks like running right now. [BRIEF LIVE MOMENT — open the terminal, show CLAUDE.md loading in a session, close. 60 seconds max. Proof before explanation.]
 
 ---
 
@@ -140,7 +141,7 @@
 git clone github.com/LeadGrowGTM/claude-code-gtm
 ```
 
-> **Speaker notes:** Clone the repo now. The companion repo mirrors the course chapter by chapter. Each folder has a README telling you what you're building, the files you need, and what the state should look like at the end. Chapter 6 has a before/ and after/ folder — you can diff them if you want to skip the build and just see the output.
+> **Speaker notes:** Clone the repo now. The companion repo mirrors the course chapter by chapter. Each folder has a README telling you what you're building and what the end state looks like. Chapter 6 has a before/ and after/ folder — diff them and you'll see exactly what 50 minutes with this system produces. One more thing: the repo also includes the knowledge graph scripts — `kg-query.js`, `kg-index.js`. Run the indexer once and the system can find its own skills from that point forward. That becomes useful as your library grows past 20 skills. Details in the tools/ folder. Chapter 2 is where you build the foundation — the document that loads at the start of every session.
 
 ---
 
@@ -232,22 +233,42 @@ or is genuinely ambiguous.
 
 ---
 
-## Slide 2.6 — Rules: the employee handbook
+## Slide 2.6 — Rules: the two that matter for GTM
 
-**Storyboard:** A dark terminal showing a file tree: `.claude/rules/` with seven files beneath it. The files appear in a list, each on its own line in monospace. The tree itself is the visual — the viewer counts the files and registers that each one is a specific constraint, not a generic "guidelines" document. Clean, no icons.
+**Storyboard:** A dark terminal showing a file tree: `.claude/rules/` with seven files beneath it, but two are visually highlighted or marked — `ask-vs-act.md` and `scope-before-execute.md`. The other five are dimmed or smaller. The visual says: there are seven, and two of them run your daily workflow. Start here.
 
 ```
 .claude/rules/
-├── ask-vs-act.md
+├── ask-vs-act.md          ← start here
+├── scope-before-execute.md ← start here
 ├── workflow.md
 ├── file-conventions.md
-├── scope-before-execute.md
 ├── context-and-tools.md
 ├── archive-safety.md
 └── prompt-library.md
 ```
 
-> **Speaker notes:** Rules are behavioral constraints that load alongside CLAUDE.md. Think of them as the employee handbook. The ones that matter most for GTM work are ask-vs-act and scope-before-execute. Ask-vs-act defines when Claude should just do the thing vs. when it should stop and confirm. Scope-before-execute stops it from charging ahead on the wrong branch or the wrong client. All seven are in the repo.
+> **Speaker notes:** Seven rules in the repo. You don't need all seven on day one. The two that change your daily work immediately are ask-vs-act and scope-before-execute. Ask-vs-act defines when Claude should just do the thing vs. when it should stop and confirm — without it, you're answering confirmation questions every two minutes. Scope-before-execute stops it from charging ahead on the wrong client folder or the wrong branch. Add the others as you hit the problems they solve. Before I show you ask-vs-act firing in a session — let me show you what happens without it.
+
+---
+
+## Slide 2.6b — Without the rule: the confirmation loop
+
+**Storyboard:** A Claude Code terminal screenshot or short screen recording showing the failure mode — Claude asking "Should I proceed?" after every step of a simple task. Three confirmation requests in a row before any actual output. The visual is intentionally tedious to look at. The viewer feels the friction before the fix.
+
+```
+User: Build a cold email sequence for Acme Corp.
+
+Claude: I'll start by researching Acme Corp. Should I proceed?
+User: Yes.
+Claude: Research complete. Should I now run the ICP research skill?
+User: Yes.
+Claude: ICP score is 18/25. Should I write the sequence?
+User: Yes.
+...
+```
+
+> **Speaker notes:** This is the default. Every step, a confirmation request. For a five-step task that takes 20 minutes, you're answering questions for the first 10 of them. The ask-vs-act rule closes this in six lines of markdown. Watch what changes.
 
 ---
 
@@ -366,19 +387,21 @@ skills/cold-email/
 
 ---
 
-## Slide 3.7 — Skills trigger from rules
+## Slide 3.7 — Skills trigger based on what you're doing
 
-**Storyboard:** A small table showing three situation → skill triggers, styled to look like a routing rule. The left column is a situation (italicized, slightly dimmer). The right column is the skill that fires (monospace, bright). The visual communicates: the system is self-aware enough to load its own tools based on what's happening.
+**Storyboard:** A small table showing three situation → skill triggers. Left column: the situation (slightly dimmer, italicized). Right column: the skill that auto-loads (monospace, bright). Below the table, one concrete example in plain text: "Open a file in clients/ → client-discipline loads automatically." The visual communicates: you don't have to remember which playbook to use — the system loads the right one based on context.
 
 ```markdown
-| Trigger situation                          | Skill to invoke       |
-|--------------------------------------------|-----------------------|
-| Code edit / refactor / new file            | engineering-discipline|
-| API error / raw content pasted             | task-discipline       |
-| Any work under clients/                    | client-discipline     |
+| Trigger situation                | Skill that loads        |
+|----------------------------------|-------------------------|
+| Code edit / refactor / new file  | engineering-discipline  |
+| API error / raw content pasted   | task-discipline         |
+| Any work under clients/          | client-discipline       |
 ```
 
-> **Speaker notes:** Rules can also trigger skills. This table in workflow.md tells Claude: after touching a client folder, invoke client-discipline. It's a progressive disclosure system — you don't load all the constraints all the time, you load the ones relevant to what you're doing. This keeps context lean and the system fast. The system loads its own playbook based on the situation.
+Example: open `clients/acme-corp/sequences/step1.md` → client-discipline loads automatically, pulling client-specific copy standards and campaign rules into context.
+
+> **Speaker notes:** Here's the concrete version: when I open anything inside the clients/ folder, the workflow rule fires and loads client-discipline. That skill contains the copy standards, the QA rules, and the campaign guard-rails for client work. I don't invoke it manually — I just open the file. The rule handles it. This is the progressive disclosure pattern — you don't load all the constraints all the time. You load the ones relevant to what you're doing right now. Keeps context lean, keeps the system fast.
 
 ---
 
@@ -386,7 +409,7 @@ skills/cold-email/
 
 **Storyboard:** A single sentence centered: "Compound interest." Below it in smaller text: "30 minutes to write. Runs correctly forever." Below that, a list of the skills now in the repo. Forward arrow at the bottom: "Chapter 4: Agents →" The viewer should leave this chapter feeling like they've planted something that will pay dividends.
 
-> **Speaker notes:** Skills are the compound interest of this system. You spend 30 minutes writing a good skill, and it runs correctly every time for the rest of your agency's life. The ICP research and cold-email skills are in the repo. Fork them, fill in your insider knowledge, and they become your skills. Next chapter: agents. That's how you run 10 skills at once.
+> **Speaker notes:** Skills are the compound interest of this system. You spend 30 minutes writing a good skill, and it runs correctly every time for the rest of your agency's life. The ICP research and cold-email skills are in the repo. Fork them, fill in your insider knowledge, and they become your skills. Right now we've been running one skill at a time. Agents are how you stop doing that — next chapter, we run 10 in parallel.
 
 ---
 
@@ -400,7 +423,7 @@ skills/cold-email/
 
 **Storyboard:** A simple equation, centered on dark background, large type: "1 operator + agents = agency-level throughput." No decoration. Let the math land. The viewer should feel the implication: the bottleneck isn't headcount anymore.
 
-> **Speaker notes:** An agent is an isolated worker you spawn. It has its own context window, its own tool access, and it runs independently. While you're in one conversation, three agents can be researching three different companies simultaneously. That's not a demo feature — that's how I run research across 11 client campaigns without a research team.
+> **Speaker notes:** An agent is an isolated worker you spawn. It has its own context window, its own tool access, and it runs independently. While you're in one conversation, three agents can be researching three different companies simultaneously. That's not a demo feature — that's how I run research across 11 client campaigns without a research team. This chapter is also what makes the enrichment waterfall in Chapter 5 viable at scale — without agents coordinating the pipeline, you'd be running it one company at a time.
 
 ---
 
@@ -461,19 +484,19 @@ Main session stays clean
 
 ---
 
-## Slide 4.6 — The knowledge graph
+## Slide 4.6 — How smart-searcher finds its tools
 
-**Storyboard:** A dark terminal showing two commands — `kg-query.js search "cold email"` and `kg-skill-graph.js --query "write outbound sequence"` — and the output each returns (a file path, a skill name). The visual is clean and fast: two commands, two answers. The takeaway: the system knows where its own tools are.
+**Storyboard:** A flow diagram: smart-searcher spawns → queries knowledge graph → returns the right skill path → main session proceeds. Two terminal lines showing the query and the result. The visual is: smart-searcher isn't guessing — it's querying an index. One idea: the agent knows where things are because the system holds the map.
 
 ```bash
-# Find everything related to "cold email"
-bun knowledge-graph/scripts/kg-query.js search "cold email"
-
-# Find the right skill for a task
+# smart-searcher runs this internally before any task
 bun knowledge-graph/scripts/kg-skill-graph.js --query "write outbound sequence"
+# → skills/cold-email/SKILL.md
+
+# Result: main session loads the right skill, not a generic prompt
 ```
 
-> **Speaker notes:** The knowledge graph is what makes the system self-aware. Instead of telling Claude where everything is in every session, you index your workspace once and query it. Smart-searcher uses this first before globbing files. As your skill library grows past 20 skills, this becomes essential — you can't hold the map in your head, so the system holds it for you.
+> **Speaker notes:** Smart-searcher doesn't guess what skill to load — it queries the knowledge graph first. You index your workspace once with kg-index.js, and from that point forward, smart-searcher finds the right skill for any task automatically. Once your library grows past 20 skills, this is what keeps the system coherent — you can't hold the full skill map in your head, so the graph holds it for you. Run the indexer from the repo's knowledge-graph/scripts/ folder. It reindexes in under a minute.
 
 ---
 
@@ -481,7 +504,7 @@ bun knowledge-graph/scripts/kg-skill-graph.js --query "write outbound sequence"
 
 **Storyboard:** Three-row summary. Each row: agent name on left, one-line role on right. Below all three, a single rule in large text: "Spawn, don't read." Forward arrow: "Chapter 5: The Enrichment Waterfall →" The chapter close should feel like a standing operating procedure has just been established.
 
-> **Speaker notes:** Three agents, one pattern. Always spawn smart-searcher first for discovery, task-orchestrator for complex routing, researcher for deep company work. The pattern is simple: spawn, don't read. Next chapter is the enrichment waterfall — where agents and skills combine into a pipeline that runs end-to-end without you.
+> **Speaker notes:** Three agents, one pattern. Always spawn smart-searcher first for discovery, task-orchestrator for complex routing, researcher for deep company work. The pattern is simple: spawn, don't read. Chapter 5 is where agents and skills combine into a single pipeline — researcher pulls company data, smart-searcher loads the ICP skill, the waterfall enriches, cold-email writes the sequence. All of it without you switching context. That's next.
 
 ---
 
@@ -495,7 +518,7 @@ bun knowledge-graph/scripts/kg-skill-graph.js --query "write outbound sequence"
 
 **Storyboard:** A stark cost-per-record number, large and centered. Below it, a multiplication: "× 11,000 records/month" — and the result. Nothing else. No logos, no screenshots. The number does the work. The viewer either recognizes this as their life, or as what they're avoiding.
 
-> **Speaker notes:** Clay is a great product. I'm not saying it isn't. But when you're running 11 client campaigns and each one has a 1,000-lead list, you're paying for enrichment on 11,000 records a month. A lot of that enrichment is stuff you can get for free — company website data, LinkedIn signals, tech stack detection. The waterfall is how you get that for almost nothing.
+> **Speaker notes:** Clay is a great product. I'm not saying it isn't. But when you're running 11 client campaigns and each one has a 1,000-lead list, you're paying for enrichment on 11,000 records a month. Standard Clay enrichment — website scrape, LinkedIn pull, tech stack — runs somewhere between $0.05 and $0.15 per record depending on your plan and which providers you hit. At 11,000 records, that's $550 to $1,650 a month just for the data layer. And you don't own any of it — if Clay changes pricing or a provider drops out, you start over. The waterfall runs the same enrichment for a fraction of that. Most records at near-zero cost. The math is in slide 5.6. [FILL IN YOUR ACTUAL MONTHLY CLAY SPEND BEFORE RECORDING — use real numbers.]
 
 ---
 
@@ -634,7 +657,7 @@ The build sequence:
 
 **Storyboard:** Two-column result card. Left: "Time elapsed" with the actual timer result in large type. Right: a checklist of everything produced — research doc, ICP score, two-step sequence, Bison upload. Both columns are green/confirmed. The visual is a receipt. It says: this is what 50 minutes with this system produces.
 
-> **Speaker notes:** That's the system. Research to live campaign in [X] minutes. The before/ and after/ folders in the repo show exactly what changed — you can diff them and see every file that got created. Next chapter is the business layer — what this does to your cost of delivery and how you make the case for it to a client or your leadership.
+> **Speaker notes:** Research to live campaign in [X] minutes — fill this in with the real time after recording. Before I move on, here's what the session actually produced: one company research doc with ICP score, one two-step email sequence that passed all quality gates, one Bison upload, one live campaign. All from a company I'd never seen before that session. The before/ and after/ folders in the repo show exactly what changed — every file that was created, the full state diff. Diff them and you'll see the whole session output in two minutes. That's the system. The next chapter is about what it's worth commercially — what this does to your cost of delivery, and the two ways to make that case depending on who you're talking to.
 
 ---
 
@@ -753,7 +776,7 @@ Additional tools:
 - Bison CLI: `github.com/LeadGrowGTM/bison-cli`
 - TechSight: open source, link in `tools/README.md`
 
-> **Speaker notes:** Clone the repo, start with the CLAUDE.md template, and fill in your insider knowledge in the skill stubs. Those three steps get you from zero to a working system. The insider knowledge is the part only you can write — everything else in the repo is infrastructure. If you build something with this, share it. Links are in the description.
+> **Speaker notes:** That's the full stack. CLAUDE.md briefs the system. Rules prevent the failure modes. Skills encode what you know. Agents multiply your throughput. The waterfall cuts your data cost. And the business model restructures your margin — same clients, half the headcount cost, higher output per campaign. That's not a demo — that's what's running at LeadGrow right now. Three things to do with it: clone the repo, fill in your CLAUDE.md, and write your insider knowledge into the skill stubs. The insider knowledge is the only part only you can write. Everything else is infrastructure. If you build something with this, share it. Links in the description.
 
 ---
 
