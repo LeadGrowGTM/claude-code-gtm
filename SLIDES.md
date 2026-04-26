@@ -16,7 +16,22 @@
 
 **Storyboard:** Black background. Full-width white text: "Claude Code for GTM Operators." Below it, in smaller gray: "The system behind agency-grade outbound." Bottom-right corner, monospace: `github.com/LeadGrowGTM/claude-code-gtm`. Nothing else on screen. No gradients, no logos, no animation. Silence before speaking.
 
-> **Speaker notes:** No intro. Just start. If you're watching this you already know what Claude Code is and you want to see it applied to real outbound work. That's what this is. Everything I show you here is running in production across 11 client campaigns right now.
+> **Speaker notes:** No intro. Just start. If you're watching this you already know what Claude Code is and you want to see it applied to real outbound work. That's what this is.
+
+---
+
+## Slide 0.1b — Proof of production
+
+**Storyboard:** Dark background. Four numbers stacked vertically — large, white, no labels yet. They reveal one at a time as you speak, each with a short descriptor appearing beneath it in smaller gray text. The numbers do the work before you explain them. No charts, no logos, no color — just the math. The viewer should feel: "this person is operating at scale."
+
+| | |
+|--|--|
+| **394** | calls booked for clients in Q1 |
+| **494,000** | leads contacted |
+| **5** | Claude Code implementations running |
+| **$512,000** | revenue generated for one client — their record |
+
+> **Speaker notes:** These are the Q1 numbers from the system I'm about to show you. 394 calls booked on behalf of clients. 494,000 leads contacted. Five Claude Code implementations across different agencies and operators. And one client who hit their record revenue quarter — $512,000 — powered entirely by this stack. I'm not showing you a proof of concept. I'm showing you what's already running.
 
 ---
 
@@ -423,7 +438,7 @@ Example: open `clients/acme-corp/sequences/step1.md` → client-discipline loads
 
 **Storyboard:** A simple equation, centered on dark background, large type: "1 operator + agents = agency-level throughput." No decoration. Let the math land. The viewer should feel the implication: the bottleneck isn't headcount anymore.
 
-> **Speaker notes:** An agent is an isolated worker you spawn. It has its own context window, its own tool access, and it runs independently. While you're in one conversation, three agents can be researching three different companies simultaneously. That's not a demo feature — that's how I run research across 11 client campaigns without a research team. This chapter is also what makes the enrichment waterfall in Chapter 5 viable at scale — without agents coordinating the pipeline, you'd be running it one company at a time.
+> **Speaker notes:** An agent is an isolated worker you spawn. It has its own context window, its own tool access, and it runs independently. While you're in one conversation, three agents can be researching three different companies simultaneously. That's not a demo feature — 394 calls booked in Q1, 494,000 leads contacted, five implementations running across different operators. No research team. This chapter is also what makes the enrichment waterfall in Chapter 5 viable at scale — without agents coordinating the pipeline, you'd be running it one company at a time.
 
 ---
 
@@ -518,7 +533,7 @@ bun knowledge-graph/scripts/kg-skill-graph.js --query "write outbound sequence"
 
 **Storyboard:** A stark cost-per-record number, large and centered. Below it, a multiplication: "× 11,000 records/month" — and the result. Nothing else. No logos, no screenshots. The number does the work. The viewer either recognizes this as their life, or as what they're avoiding.
 
-> **Speaker notes:** Clay is a great product. I'm not saying it isn't. But when you're running 11 client campaigns and each one has a 1,000-lead list, you're paying for enrichment on 11,000 records a month. Standard Clay enrichment — website scrape, LinkedIn pull, tech stack — runs somewhere between $0.05 and $0.15 per record depending on your plan and which providers you hit. At 11,000 records, that's $550 to $1,650 a month just for the data layer. And you don't own any of it — if Clay changes pricing or a provider drops out, you start over. The waterfall runs the same enrichment for a fraction of that. Most records at near-zero cost. The math is in slide 5.6. [FILL IN YOUR ACTUAL MONTHLY CLAY SPEND BEFORE RECORDING — use real numbers.]
+> **Speaker notes:** Clay is a great product. I'm not saying it isn't. 494,000 leads contacted in Q1. That's the volume this system runs. At that scale, you're paying for enrichment on tens of thousands of records a month. Standard Clay enrichment — website scrape, LinkedIn pull, tech stack — runs somewhere between $0.05 and $0.15 per record depending on your plan and which providers you hit. At 11,000 records, that's $550 to $1,650 a month just for the data layer. And you don't own any of it — if Clay changes pricing or a provider drops out, you start over. The waterfall runs the same enrichment for a fraction of that. Most records at near-zero cost. The math is in slide 5.6. [FILL IN YOUR ACTUAL MONTHLY CLAY SPEND BEFORE RECORDING — use real numbers.]
 
 ---
 
