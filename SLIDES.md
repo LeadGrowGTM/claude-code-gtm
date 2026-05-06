@@ -29,9 +29,9 @@
 | **394** | calls booked for clients in Q1 |
 | **494,000** | leads contacted |
 | **5** | Claude Code implementations running |
-| **$512,000** | revenue generated for one client — their record |
+| **$726,000** | revenue generated for one client — their record |
 
-> **Speaker notes:** These are the Q1 numbers from the system I'm about to show you. 394 calls booked on behalf of clients. 494,000 leads contacted. Five Claude Code implementations across different agencies and operators. And one client who hit their record revenue quarter — $512,000 — powered entirely by this stack. I'm not showing you a proof of concept. I'm showing you what's already running.
+> **Speaker notes:** These are the Q1 numbers from the system I'm about to show you. 394 calls booked on behalf of clients. 494,000 leads contacted. Five Claude Code implementations across different agencies and operators. And one client who hit their record revenue quarter — $726,000 — powered entirely by this stack. I'm not showing you a proof of concept. I'm showing you what's already running.
 
 ---
 
@@ -41,9 +41,10 @@
 
 1. A working Claude Code GTM infrastructure
 2. A companion repo — clone it once, adapt it forever
-3. The headcount math to justify this to a client or your leadership
+3. Your own tools integrated directly into Claude Code — one interface for everything
+4. The headcount math to justify this to a client or your leadership
 
-> **Speaker notes:** This isn't a tutorial. By the end you'll have the actual files — CLAUDE.md template, skills, agents, the enrichment waterfall script. Clone the repo now if you want to follow along. Link is on screen and in the description.
+> **Speaker notes:** This isn't a tutorial. By the end you'll have the actual files — CLAUDE.md template, skills, agents, the enrichment waterfall script. And you'll know how to wire your own tools into that interface so you stop switching between five different dashboards. Clone the repo now if you want to follow along. Link is on screen and in the description.
 
 ---
 
@@ -75,6 +76,33 @@
 | 7 | The Business Layer | 20 min |
 
 > **Speaker notes:** The chapters build on each other — skip one and you'll feel it. Specifically: Chapter 3 (skills) is what makes the live build in Chapter 6 readable. If you jump straight to Chapter 6 without Chapter 3, you're watching a demo, not a blueprint. If you're already running Claude Code and want the cost argument, Chapter 5 and 7 are standalone. Everything else, watch in order. Here's where we're going — start with the thesis.
+
+---
+
+## Slide 0.5 — Before You Start: Install, Auth, IDE
+
+**Storyboard:** Three panels side by side on dark background. Panel 1 "Install" — one command. Panel 2 "Auth" — browser OAuth, one command. Panel 3 "IDE" — VS Code sidebar alongside terminal. Below all three: "5 minutes. Then you have a terminal and a dashboard." No GUI screenshots — just commands and panel labels. Viewers starting from zero pause here; everyone else skips ahead.
+
+```bash
+# 1. Install (pick one)
+npm install -g @anthropic-ai/claude-cli
+# or
+brew install claude
+
+# 2. Authenticate
+claude auth
+# → Opens browser → Anthropic login → Returns to terminal
+
+# 3. IDE integration (optional but recommended)
+# VS Code: install "Claude Code" extension
+
+# 4. First session
+cd your-workspace
+claude
+# → Reads CLAUDE.md → Ready
+```
+
+> **Speaker notes:** If you already have Claude Code running, skip ahead — this is for anyone starting from zero. Install via npm or brew, one command. Authentication is OAuth: `claude auth` opens a browser, you log in with your Anthropic account, and you're back in the terminal. The IDE integration gives you a sidebar alongside your terminal. For this course you need the terminal (primary interface) and VS Code if you want to follow the SKILL.md editing live. Under five minutes total. One thing to know: Claude Code reads the CLAUDE.md file in your working directory when it opens. That's the first thing Chapter 2 builds.
 
 ---
 
@@ -160,6 +188,55 @@ git clone github.com/LeadGrowGTM/claude-code-gtm
 
 ---
 
+## Slide 1.7 — Git: The Four Things You Actually Need
+
+**Storyboard:** Dark background. Four commands stacked vertically in a terminal block — each with a one-line plain-English comment above it. No diagrams, no branch trees. Just the four commands with what they do. Below all four, a single line: "That's it. Everything else is recoverable." The visual should feel like a cheat sheet, not a lecture.
+
+```bash
+# Save your work and send it to GitHub
+git add . && git commit -m "what I did" && git push
+
+# Pull someone else's changes (or your own from another machine)
+git pull
+
+# Stop tracking files you don't want in the repo
+echo ".env" >> .gitignore   # API keys, secrets — never commit these
+echo "node_modules/" >> .gitignore
+
+# See what's changed before you commit
+git status
+git diff
+```
+
+**Why Git matters for this course:**
+- Your CLAUDE.md, skills, and rules files live in Git — version controlled, shareable, recoverable
+- Claude Code reads your repo state and uses `gh` to interact with GitHub directly
+- Every chapter in the companion repo is a commit you can diff, roll back, or branch from
+
+> **Speaker notes:** Git is how you don't lose work. Four commands cover 90% of what you'll do in this course. `git add . && git commit && git push` saves and syncs. `git pull` gets changes. `.gitignore` keeps secrets out of GitHub — your `.env` file with API keys should always be in there, day one. And `git status` tells you what changed before you commit. One thing that matters here specifically: your CLAUDE.md and skill files are assets now. Treat them like code. Commit them. When you update your insider knowledge section, commit that. When a skill breaks, you can roll back to the last working version. Claude Code can also use `gh` commands directly to create repos, open PRs, and view issues without you touching a browser. If you're brand new to Git, clone the companion repo and the habit will build naturally.
+
+---
+
+## Slide 1.7b — GitHub Issues as Your Ops Backlog
+
+**Storyboard:** A split screen. Left: a clean GitHub Issues list — three open issues with short, specific titles ("cold-email skill breaking on single-founder companies", "add LinkedIn scrape to Tier 1 waterfall", "test ICP research skill on 10 new accounts"). Right: a terminal running `gh issue list` showing the same issues. The message: your ops backlog and your code live in the same place. No Notion, no sticky notes.
+
+```bash
+# View open issues from the terminal
+gh issue list
+
+# Create an issue without leaving Claude Code
+gh issue create --title "cold-email skill breaks on solo founders" \
+                --body "Step 2 output generic when no team signals present"
+
+# Close an issue when the fix ships
+gh issue close 12
+```
+
+> **Speaker notes:** GitHub Issues are how you track what's broken, what needs building, and what's next — without a separate tool. Claude Code can read your issues list and create new ones from the terminal. Practical use: when you notice a skill failing a quality gate consistently, file an issue with the exact failure mode. When you build the fix, close it in the same commit message with "fixes #12". Your ops backlog and your codebase live in one place. That's the compounding benefit of running everything through one interface.
+
+---
+
 ---
 
 # CHAPTER 2 — FOUNDATION: CLAUDE.md AS AN OPERATOR BRIEF
@@ -225,6 +302,25 @@ or is genuinely ambiguous.
 ```
 
 > **Speaker notes:** This is the line that changes the most about how you work. Without it, Claude asks "should I proceed?" after every step. With it, you give a task and come back to results. For GTM work — building a campaign, running enrichment, writing a sequence — you want the latter. The default behavior is cautious. You're opting out of caution.
+
+---
+
+## Slide 2.4b — Voice-to-Prompt: Cut the Friction
+
+**Storyboard:** Dark background. Left: phone with microphone active — "30 sec, dictated." Right: terminal with a complete, fully-contextualized prompt. Arrow connecting them. Two examples below — one typed (terse, incomplete) vs. one dictated (complete, full context). Contrast makes the quality difference obvious without commentary.
+
+```
+Typed: "write cold email for acme"
+
+Dictated: "Write a two-step cold email for Acme Corp targeting their VP of Sales.
+           They just raised a Series B, using Salesforce but no sequences tool.
+           Use the pain angle from the ICP research file. Step 1 under 80 words,
+           Step 2 reframes — don't follow up. Single brace variables."
+
+Same time investment. Very different output quality.
+```
+
+> **Speaker notes:** The activation energy for a good prompt is friction. When you type, you abbreviate. You leave out context. Claude makes assumptions, you spend two turns correcting. When you dictate — phone speech-to-text, WhisperFlow, or any dictation tool — you naturally speak in complete sentences and give Claude the full picture in one shot. Operators who dictate prompts consistently get higher-quality first-draft output. The prompt is the brief. A briefing spoken out loud is always more complete than one typed on a keyboard while distracted. Try it for one session.
 
 ---
 
@@ -383,6 +479,29 @@ skills/cold-email/
 
 ---
 
+## Slide 3.5b — Test Before Shipping
+
+**Storyboard:** Four boxes connected left to right: BUILD → REAL DATA → FIX → SHIP. Below each: BUILD: "30 min of focus"; REAL DATA: "5 actual companies — not invented examples"; FIX: "Until quality gates pass consistently"; SHIP: "Confident. Not hopeful." Below the flow in large type: "A skill that hasn't run on real data is a draft. Not a deliverable."
+
+```
+The ritual — every new skill, every time:
+
+  BUILD      Write all 5 sections
+    ↓
+  REAL DATA  Run on 5 actual companies from your list
+    ↓
+  FIX        Find where it breaks. Update quality gates. Re-run.
+    ↓
+  SHIP       Now it's a deliverable. Not before.
+
+"A skill that hasn't run on real data is a draft.
+ Fast garbage is worse than slow correctness."
+```
+
+> **Speaker notes:** The ritual that separates usable skills from dangerous ones: test before shipping. Build the skill — all five sections. Run it on five actual companies from a real list. Not invented examples. Real companies. See where it breaks. Fix the quality gates. Run it again. A skill that passes on invented examples and fails on real data isn't done. Consistency is the bar: 8 out of 10 outputs passing all quality gates without manual correction. Below that — still a draft. A skill that produces garbage half the time is a liability, not an asset. Test before shipping.
+
+---
+
 ## Slide 3.6 — Quality gates: automated QA
 
 **Storyboard:** A code block showing the Quality Gates section. Each gate is a single checkable line — they look like a CI checklist. The visual question: "what would you have to manually review otherwise?" The answer is: all of this. These gates replace a review pass.
@@ -496,6 +615,73 @@ Main session stays clean
 **Storyboard:** Full-screen Claude Code terminal. Show three spawns happening, then results arriving. No slide overlay. The viewer should see agents running and returning. Narrate the clock — "that's three companies in the time it would take to do one manually."
 
 > **Speaker notes:** [LIVE SEGMENT — spawn researcher on three different companies. While they run, explain what each one is doing. When results come back, show how the main session synthesizes them into a single campaign brief. Timing matters here — show the clock. Three companies researched in the time it would take to do one manually. Don't rush the silence while agents run.]
+
+---
+
+## Slide 4.5d — Reading Claude's Telltales
+
+**Storyboard:** Four indicators in a 2x2 grid — amber dashboard warnings, not red alarms. Each: signal name in orange, concrete example in gray. Signals: Hedging Language, Length Drift, Re-asking Questions, Generalization Slip. Below: "Two of these together = /compact or restart. Don't wait for the third." Clinical, not alarming — these are early, readable signals.
+
+```
+Claude doesn't announce when output quality drops.
+You have to read the telltales.
+
+  ⚠ Hedging language    "I believe" / "it seems likely" (was specific before)
+  ⚠ Length drift        Shorter without getting denser
+  ⚠ Re-asking           Asking something you answered 2 turns ago
+  ⚠ Generalization      Specific ICP advice → generic GTM advice
+
+Two together: /compact (mid-task) or start fresh (new task)
+Don't push through. Next 20 min will be worse than last 20.
+```
+
+> **Speaker notes:** Claude doesn't tell you when it's running out of context. Four signals to watch for: hedging language increases — it says "I believe" where it used to just answer. Response length shrinks without getting more concise. It re-asks questions you already answered — context loss in real time. Specifics slip into generics — tailored ICP advice starts sounding like a blog post. When you see two of these together: /compact mid-task to preserve progress, or start fresh for a new task. Don't push through hoping it self-corrects. The next 20 minutes of output will be worse. Cut it early.
+
+---
+
+## Slide 4.5e — Skill vs. Automation vs. Agentic Automation
+
+**Storyboard:** Three columns on dark background, each a distinct block. Header row: "Skill", "Automation", "Agentic Automation." Four comparison rows below: Who triggers it, What it handles, Where it lives, Example. The columns read left to right as increasing autonomy — the visual should feel like a spectrum, not three random options. The viewer should finish reading and immediately know which column their next build belongs in.
+
+| | Skill | Automation | Agentic Automation |
+|--|-------|------------|-------------------|
+| **Triggered by** | You, in a session | Event or schedule | Event, schedule, or another agent |
+| **Handles** | Ambiguity, judgment calls | Deterministic steps only | Ambiguity + multi-step decisions |
+| **Lives in** | Claude Code | N8n / Make / Zapier | Claude Code (scheduled or triggered) |
+| **Example** | Write cold email from research | Push enriched lead to Bison on webhook | Research company → score ICP → write sequence → upload → notify if score > 18 |
+
+> **Speaker notes:** Three tools, three different jobs. A skill handles ambiguity — you invoke it when there's judgment involved, context to read, output that varies. An automation runs a fixed sequence: trigger fires, steps execute, done. Deterministic. If the logic is purely IF-THEN, it's an automation and N8n is fine. The third column is where this gets interesting: agentic automation combines Claude's judgment with the autonomy of a scheduled trigger. A nightly agent that pulls yesterday's new leads, scores ICP fit, writes sequences for anything above 18, and uploads them — that's not a skill you invoke, and it's not a simple automation. It's a worker running a shift. The question for every new workflow you're about to build: which column does this belong in? Pick the simplest option that handles the ambiguity level of the task.
+
+---
+
+## Slide 4.5f — The Karpathy Auto-Research Loop
+
+**Storyboard:** A circular loop diagram on dark background — six labeled stages connected by arrows going clockwise. The loop reads like a gear system: each stage feeds the next. In the center of the circle, two words: "Gets better." Beneath the loop, two concrete real-world examples shown as compact before/after blocks. The visual message: this isn't a one-time setup. It's a system that improves itself.
+
+```
+  Domain Research
+        ↓
+  Heuristics Library
+        ↓
+  Warm-Start Protocol  →  [Gets better]
+        ↓
+  Artifact Inspection
+        ↓
+  Parallel Readiness
+        ↓
+  Exploration Budget
+        ↑_____________
+```
+
+**Example 1 — Tool integration:**
+> Before: TechSight runs as a separate CLI you paste results from.
+> After: TechSight is wired directly into Claude Code. Research agent calls it automatically. One interface.
+
+**Example 2 — Sequence quality loop:**
+> Before: Write sequence → review manually → tweak → repeat.
+> After: Write sequence → score against quality gates → auto-iterate on failures → ship when gates pass. No manual review pass.
+
+> **Speaker notes:** Andrej Karpathy documented this pattern for LLM optimization: the loop itself isn't complicated, what determines whether it actually improves is what you feed into it and how you steer it. Six failure modes kill 80% of loops before they compound. Blind start — you skip domain research and the LLM has no vocabulary. Rewrite churn — it rewrites from scratch every iteration instead of building on what worked. Cold restart — no warm-start protocol, so each run ignores prior wins. Metric blindness — score goes up but output gets worse because you're measuring the wrong thing. Premature parallelism — you parallelize before the single-agent loop is stable. Greedy lock-in — it always takes the better option and never explores, so it local-maxes. The practical version for GTM: wire your tools in so Claude calls them directly, then let the quality gates do the review pass. Stop doing the work a loop can do.
 
 ---
 
@@ -779,7 +965,22 @@ What you charge for:
 
 ---
 
-## Slide 7.8 — CTA: Three things to do next
+## Slide 7.8 — GTM Orchestrator: the live system
+
+**Storyboard:** A five-stage pipeline flow, left to right, dark background. Each stage is a labeled box with a one-line description below it. Connector arrows between them. The last box — "Offer: free campaign" — is highlighted in orange or accent color to signal the close. This isn't a concept slide. It's a wiring diagram for a system that's running.
+
+```
+[Signal-Led DB]  →  [Weekly Hire Monitor]  →  [Relevancy Assessment]  →  [Permissionless Value Drop]  →  [3-Step Sequence]
+ Initial company      New hires at target        Role → ICP match           "Here are 10 companies          Email 1+2: signal intel
+ list from signal     companies detected          Company bucketing           actively hiring [role]          Email 3: free campaign
+ database             weekly, auto-flagged        by fit score               that match your ICP"            offer, one slot
+```
+
+> **Speaker notes:** This is the GTM Orchestrator. Here's how it runs. We start with a signal-led database — a curated list of companies that match the startup's ICP. Once a week, the system checks for new hires at those companies. Not all hires — we run a relevancy assessment first. The question is: what roles, when filled, signal that this company is the right buyer right now for the startup we're running campaigns for? When a company trips that signal, it gets bucketed and queued for research. The output is a permissionless value drop — "here are ten companies in your space actively hiring for [role], we think three of them are your best Q3 targets, here's why." No pitch. Just signal. The CTA at the end of the sequence isn't "book a call" — it's "we're offering one company a free signal-led campaign this quarter, want us to run yours?" Lower volume. Higher reply rate. The free campaign offer sits in email three, not email one. By the time they see it, they've already gotten value twice.
+
+---
+
+## Slide 7.9 — CTA: Three things to do next
 
 **Storyboard:** The repo link large and centered: `github.com/LeadGrowGTM/claude-code-gtm`. Below it, three numbered steps. Clean, actionable, no fluff. The viewer should be able to pause, screenshot this, and have everything they need to start. Links to Bison CLI and TechSight below the steps in smaller monospace.
 
