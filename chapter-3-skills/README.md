@@ -84,6 +84,28 @@ your-workspace/
 
 ---
 
+---
+
+## Bonus: Install a Pre-Built Skill
+
+The Feynman skill is a ready-to-install example of a non-GTM skill that shows how skills generalize. It teaches any concept using the Feynman Technique — you explain first, Claude probes your gaps, then delivers a calibrated explanation calibrated to your level. Also outputs HTML concept explainers for dashboards and reports.
+
+```bash
+mkdir -p .claude/skills/feynman/references
+curl -sL https://raw.githubusercontent.com/LeadGrowGTM/feynman-skill/main/SKILL.md \
+  -o .claude/skills/feynman/SKILL.md
+curl -sL https://raw.githubusercontent.com/LeadGrowGTM/feynman-skill/main/references/concept-guide.md \
+  -o .claude/skills/feynman/references/concept-guide.md
+curl -sL https://raw.githubusercontent.com/LeadGrowGTM/feynman-skill/main/references/html-template.md \
+  -o .claude/skills/feynman/references/html-template.md
+```
+
+Then: `feynman pipeline velocity` — Claude will ask your familiarity level and run the technique.
+
+Repo: `github.com/LeadGrowGTM/feynman-skill`
+
+---
+
 ## Next Chapter
 
 [Chapter 4 →](../chapter-4-agents/README.md) — Add agents for multi-step tasks.

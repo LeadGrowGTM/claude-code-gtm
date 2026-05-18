@@ -991,8 +991,10 @@ What you charge for:
 Additional tools:
 - Bison CLI: `github.com/LeadGrowGTM/bison-cli`
 - TechSight: open source, link in `tools/README.md`
+- Feynman skill (installable): `github.com/LeadGrowGTM/feynman-skill`
+- context-os (workspace OS patterns): `github.com/jacob-dietle/context-os`
 
-> **Speaker notes:** That's the full stack. CLAUDE.md briefs the system. Rules prevent the failure modes. Skills encode what you know. Agents multiply your throughput. The waterfall cuts your data cost. And the business model restructures your margin — same clients, half the headcount cost, higher output per campaign. That's not a demo — that's what's running at LeadGrow right now. Three things to do with it: clone the repo, fill in your CLAUDE.md, and write your insider knowledge into the skill stubs. The insider knowledge is the only part only you can write. Everything else is infrastructure. If you build something with this, share it. Links in the description.
+> **Speaker notes:** That's the full stack. CLAUDE.md briefs the system. Rules prevent the failure modes. Skills encode what you know. Agents multiply your throughput. The waterfall cuts your data cost. And the business model restructures your margin — same clients, half the headcount cost, higher output per campaign. That's not a demo — that's what's running at LeadGrow right now. Three things to do with it: clone the repo, fill in your CLAUDE.md, and write your insider knowledge into the skill stubs. The insider knowledge is the only part only you can write. Everything else is infrastructure. Two bonus repos worth bookmarking: the Feynman skill teaches any concept using the Feynman Technique — install it in your workspace and it fires automatically when you say "teach me X." context-os by Jacob Dietle is a workspace OS pattern repo that complements everything in this course. If you build something with this, share it. Links in the description.
 
 ---
 
